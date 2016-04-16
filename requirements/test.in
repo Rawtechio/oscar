@@ -1,0 +1,9 @@
+# Testing tools
+pytest-django
+pytest-sugar
+django-test-plus
+factory_boy
+
+# Coverage reports
+coverage
+django_coverage_plugin

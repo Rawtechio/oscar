@@ -1,9 +1,7 @@
 # Local development dependencies go here
 -r base.in
+-r test.in
 
-# Coverage reports
-coverage
-django_coverage_plugin
 
 # Documentation
 Sphinx
@@ -13,12 +11,6 @@ django-extensions
 Werkzeug
 django-debug-toolbar
 ipdb
-
-# Testing tools
-pytest-django
-pytest-sugar
-django-test-plus
-factory_boy
 
 # Pip tools
 pip-tools

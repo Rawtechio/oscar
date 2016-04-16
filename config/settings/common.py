@@ -237,12 +237,3 @@ BROKER_URL = env("CELERY_BROKER_URL", default='django://')
 ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
-INSTALLED_APPS += ('opbeat.contrib.django',)
-OPBEAT = {
-    'ORGANIZATION_ID': env('DJANGO_OPBEAT_ORGANIZATION_ID'),
-    'APP_ID': env('DJANGO_OPBEAT_APP_ID'),
-    'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
-}
-MIDDLEWARE_CLASSES = (
-    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-) + MIDDLEWARE_CLASSES

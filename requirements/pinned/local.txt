@@ -43,6 +43,7 @@ Jinja2==2.8               # via sphinx
 kombu==3.0.35             # via celery
 MarkupSafe==0.23          # via jinja2
 oauthlib==1.0.3           # via requests-oauthlib
+opbeat==3.3
 pexpect==4.0.1            # via ipython
 pickleshare==0.7.2        # via ipython
 Pillow==3.2.0

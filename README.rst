@@ -1,6 +1,9 @@
 Oscar
 ==============================
 
+.. image:: https://travis-ci.org/Rawtechio/oscar.svg?branch=master
+    :target: https://travis-ci.org/Rawtechio/oscar
+
 PoC for GCC customer first forms
 
 

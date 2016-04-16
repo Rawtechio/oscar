@@ -9,12 +9,12 @@ gulp.task('pin:production', 'Pins all Production requirements from production.in
     "pip-compile requirements/production.in -o requirements/pinned/production.txt"
 ]));
 
-gulp.task('pin:all', 'Pins all requirements', ['pin:local', 'pin:production']);
+gulp.task('pin:travis', 'Pins all Production requirements from travis.in', shell.task([
+    "pip-compile requirements/travis.in -o requirements/pinned/travis.txt"
+]));
+
+gulp.task('pin:all', 'Pins all requirements', ['pin:local', 'pin:production', 'pin:travis']);
 
 gulp.task('sync:local', 'Sync your local requirements with pinned versions', shell.task([
     "pip-sync requirements/pinned/local.txt"
-]));
-
-gulp.task('sync:production', 'Sync your production requirements with pinned versions', shell.task([
-    "pip-sync requirements/pinned/production.txt"
 ]));

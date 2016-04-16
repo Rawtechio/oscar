@@ -39,3 +39,6 @@ redis
 
 # Task runners
 celery>3
+
+# Monitoring
+opbeat

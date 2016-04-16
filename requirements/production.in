@@ -16,7 +16,3 @@ django-storages-redux
 # Mailgun Support
 # ---------------
 django-mailgun
-
-# Opbeat agent for performance monitoring
-# -----------------------------------------
-opbeat
