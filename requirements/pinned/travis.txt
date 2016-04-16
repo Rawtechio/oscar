@@ -9,6 +9,7 @@ amqp==1.4.9               # via kombu
 anyjson==0.3.3            # via kombu
 billiard==3.3.0.23        # via celery
 celery==3.1.23
+codecov==1.6.3
 coverage==4.0.3
 defusedxml==0.4.1         # via python3-openid
 django-allauth==0.25.2
@@ -39,7 +40,7 @@ python3-openid==3.0.10    # via django-allauth
 pytz==2016.3
 redis==2.10.5
 requests-oauthlib==0.6.1  # via django-allauth
-requests==2.9.1           # via django-allauth, requests-oauthlib
+requests==2.9.1           # via codecov, django-allauth, requests-oauthlib
 six==1.10.0               # via django-braces, django-coverage-plugin, django-environ, fake-factory, python-dateutil, unicode-slugify
 termcolor==1.1.0          # via pytest-sugar
 unicode-slugify==0.1.3
