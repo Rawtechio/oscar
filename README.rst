@@ -6,6 +6,10 @@ Oscar
 .. image:: https://travis-ci.org/Rawtechio/oscar.svg?branch=master
     :target: https://travis-ci.org/Rawtechio/oscar
 
+.. image:: https://requires.io/github/Rawtechio/oscar/requirements.svg?branch=master
+     :target: https://requires.io/github/Rawtechio/oscar/requirements/?branch=master
+     :alt: Requirements Status
+
 PoC for GCC customer first forms
 
 
