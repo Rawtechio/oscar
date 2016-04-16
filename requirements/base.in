@@ -1,0 +1,41 @@
+# Package management
+wheel
+
+# Framework
+django>1.9
+
+# Configuration
+django-environ
+django-secure>1
+whitenoise>2
+
+# Forms
+django-braces
+django-crispy-forms
+django-floppyforms
+
+# Models
+django-model-utils
+
+# Images
+Pillow==3.2.0
+
+# Users and Auth
+django-allauth
+
+# Database
+psycopg2
+
+# Unicode slugification
+unicode-slugify
+django-autoslug
+
+# Time zones support
+pytz
+
+# Redis support
+django-redis
+redis
+
+# Task runners
+celery>3
