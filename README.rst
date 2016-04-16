@@ -10,6 +10,10 @@ Oscar
      :target: https://requires.io/github/Rawtechio/oscar/requirements/?branch=master
      :alt: Requirements Status
 
+.. image:: https://landscape.io/github/Rawtechio/oscar/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/Rawtechio/oscar/master
+   :alt: Code Health
+
 PoC for GCC customer first forms
 
 
