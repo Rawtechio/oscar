@@ -1,0 +1,18 @@
+.socialaccount_providers, .socialaccount_providers li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.socialaccount_providers li {
+  display: inline;
+  margin: 5px;
+}
+
+.socialaccount_providers li:first-child {
+  margin-left: 0;
+}
+
+.socialaccount_providers li a i {
+  margin-right: 6px;
+}

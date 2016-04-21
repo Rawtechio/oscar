@@ -1,33 +1,78 @@
 {% extends "account/base.html" %}
 
-{% load i18n %}
-{% load crispy_forms_tags %}
+{% load static %}
+{% load floppyforms %}
 
-{% block title %}{% trans "Signup" %}{% endblock title %}
+{% block css %}
+  {{ block.super }}
+    <link href="{% static "base/icons/font-awesome-4.5.0/css/font-awesome.css" %}" rel="stylesheet">
+    <link href="{% static "accounts/css/social_buttons_inline.css" %}" rel="stylesheet">
+{% endblock css %}
+
+{% block nav_style %}
+<nav class="header dark" data-pages="header">
+{% endblock nav_style %}
 
 {% block content %}
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-5">
-      <h1>{% trans "Sign Up" %}</h1>
-
-      <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-        {% csrf_token %}
-        {{ form|crispy }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button id="sign-up-button" class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
-      </form>
+  <section class="container container-fixed-lg p-t-65 p-b-100  sm-p-b-30 sm-m-b-30">
+    <div class="row">
+      <div class="col-md-6">
+        <h2><i class="marine-captain-cap"></i> Create a new account</h2>
+        <div class="p-r-40 sm-p-r-0">
+          <p class="semi-bold">Already have an account? Then please <a href="{{ login_url }}">sign in</a>.</p>
+          <div class="social">
+            <ul class="socialaccount_providers">
+              {% include "socialaccount/snippets/provider_list_inline.html" with process="login" %}
+            </ul>
+          </div>
+          <div class="panel" id="contact-panel">
+            <form role="form" class="m-t-15" action="{% url "account_signup" %}" method="post">
+              {% csrf_token %}
+              {% form form %}
+              {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <div class="sm-p-t-10 clearfix">
+                <button class="btn btn-primary font-montserrat all-caps fs-12 pull-right xs-pull-left">Submit</button>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="visible-xs visible-sm b-b b-grey-light m-t-35 m-b-30"></div>
+            <div class="p-l-40 sm-p-l-0 sm-p-t-10">
+              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec suscipit arcu.</h3>
+              <p>Integer at lectus massa. Proin ac ultrices elit, sit amet imperdiet risus. Quisque ut enim vitae diam vestibulum elementum sit amet tempor est.</p>
+              <br>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h5 class="block-title hint-text m-b-0">Support </h5>
+                  <address class="m-t-10">City Chambers.
+                                <br> George Square
+                                <br> Glasgow, G2 1DU</address>
+                  <br>
+                  <p class="hint-text no-margin"><i class="fa fa-envelope"></i> <span class="fs-14">support@glasgow.gov.uk</span></p>
+                  <p class="hint-text no-margin"><i class="fa fa-phone"></i> <span class="fs-14">(xx) xxxx-xxx-xxx</span></p>
+                  <p class="hint-text"><i class="fa fa-fax"></i> <span class="fs-14">(xx) xxxx-xxx-xxx</span></p>
+                </div>
+                <div class="col-sm-6">
+                  <h5 class="block-title hint-text m-b-0">Support </h5>
+                  <address class="m-t-10">City Chambers.
+                                <br> George Square
+                                <br> Glasgow, G2 1DU</address>
+                  <br>
+                  <p class="hint-text no-margin"><i class="fa fa-envelope"></i> <span class="fs-14">support@glasgow.gov.uk</span></p>
+                  <p class="hint-text no-margin"><i class="fa fa-phone"></i> <span class="fs-14">(xx) xxxx-xxx-xxx</span></p>
+                  <p class="hint-text"><i class="fa fa-fax"></i> <span class="fs-14">(xx) xxxx-xxx-xxx</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
-  </div>
-</div>
-
-
-{% endblock content %}
-
-
+  </section>
+  <!-- END CONTACT SECION -->
+{% endblock %}
 

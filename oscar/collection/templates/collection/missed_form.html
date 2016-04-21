@@ -1,0 +1,132 @@
+{% extends "collection/base.html" %}
+
+{% load floppyforms %}
+
+{% block nav_style %}
+<nav class="header dark" data-pages="header">
+{% endblock nav_style %}
+
+{% block css %}
+{{ block.super }}
+<style>
+textarea {
+  border: none;
+}
+</style>
+{% endblock css %}
+
+{% block js %}
+{{ block.super }}
+<script src='https://maps.googleapis.com/maps/api/js?sensor=false&extension=.js'></script>
+
+<script>
+    google.maps.event.addDomListener(window, 'load', init);
+    var map;
+    function init() {
+        var mapOptions = {
+            center: new google.maps.LatLng(55.828552,-4.282795),
+            zoom: 15,
+            zoomControl: false,
+            disableDoubleClickZoom: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            scrollwheel: false,
+            panControl: false,
+            streetViewControl: false,
+            draggable : false,
+            overviewMapControl: false,
+            overviewMapControlOptions: {
+                opened: false,
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: [{"stylers":[{"hue":"#006A60"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]}],
+        }
+        var mapElement = document.getElementById('map');
+        var map = new google.maps.Map(mapElement, mapOptions);
+        var locations = [
+['Your address', '3 walton street,<br />Glasgow<br />G41 3LG', 'undefined', 'undefined', 'undefined', 55.8281697, -4.283528400000023, 'https://mapbuildr.com/assets/img/markers/hollow-pin-black.png']
+        ];
+        for (i = 0; i < locations.length; i++) {
+      if (locations[i][1] =='undefined'){ description ='';} else { description = locations[i][1];}
+      if (locations[i][2] =='undefined'){ telephone ='';} else { telephone = locations[i][2];}
+      if (locations[i][3] =='undefined'){ email ='';} else { email = locations[i][3];}
+           if (locations[i][4] =='undefined'){ web ='';} else { web = locations[i][4];}
+           if (locations[i][7] =='undefined'){ markericon ='';} else { markericon = locations[i][7];}
+            marker = new google.maps.Marker({
+                icon: markericon,
+                position: new google.maps.LatLng(locations[i][5], locations[i][6]),
+                map: map,
+                title: locations[i][0],
+                desc: description,
+                tel: telephone,
+                email: email,
+                web: web
+            });
+link = '';            bindInfoWindow(marker, map, locations[i][0], description, telephone, email, web, link);
+     }
+ function bindInfoWindow(marker, map, title, desc, telephone, email, web, link) {
+      var infoWindowVisible = (function () {
+              var currentlyVisible = false;
+              return function (visible) {
+                  if (visible !== undefined) {
+                      currentlyVisible = visible;
+                  }
+                  return currentlyVisible;
+               };
+           }());
+           iw = new google.maps.InfoWindow();
+           google.maps.event.addListener(marker, 'click', function() {
+               if (infoWindowVisible()) {
+                   iw.close();
+                   infoWindowVisible(false);
+               } else {
+                   var html= "<div style='color:#000;background-color:#fff;padding:5px;width:150px;'><h4>"+title+"</h4><p>"+desc+"<p></div>";
+                   iw = new google.maps.InfoWindow({content:html});
+                   iw.open(map,marker);
+                   infoWindowVisible(true);
+               }
+        });
+        google.maps.event.addListener(iw, 'closeclick', function () {
+            infoWindowVisible(false);
+        });
+ }
+}
+</script>
+<style>
+    #map {
+        height:200px;
+        width:550px;
+    }
+    .gm-style-iw * {
+        display: block;
+        width: 100%;
+    }
+    .gm-style-iw h4, .gm-style-iw p {
+        margin: 0;
+        padding: 0;
+    }
+    .gm-style-iw a {
+        color: #4272db;
+    }
+</style>
+{% endblock js %}
+
+{% block content %}
+  <section class="container container-fixed-lg p-t-65 p-b-100  sm-p-b-30 sm-m-b-30">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Report a missed bin</h2>
+        <div id="map">
+        </div>
+        <form role="form" class="m-t-15" action="{% url "collection:create" %}" method="post">
+            {% csrf_token %}
+            {% form form %}
+            <div class="sm-p-t-10 clearfix">
+              <button class="btn btn-primary font-montserrat all-caps fs-12 pull-right xs-pull-left">Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTACT SECION -->
+{% endblock %}

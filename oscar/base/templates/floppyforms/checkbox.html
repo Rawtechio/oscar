@@ -1,0 +1,13 @@
+
+{% block content %}
+    <div class="checkbox check-primary{% if field.errors %} error{% endif %}">
+        <input
+            type="checkbox"
+            name="{{ name }}"
+            id="{{ attrs.id }}"
+            {% if value %} value="{{ value }}"{% endif %}
+            {% include "floppyforms/attrs.html" %}>
+
+        <label for="{{ attrs.id }}">{{ label|safe }}</label>
+    </div>
+{% endblock %}

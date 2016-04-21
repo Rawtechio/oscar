@@ -26,9 +26,10 @@ django-allauth
 # Database
 psycopg2
 
-# Unicode slugification
+# Slugification & URLs
 unicode-slugify
 django-autoslug
+django-activeurl
 
 # Time zones support
 pytz
@@ -42,3 +43,7 @@ celery>3
 
 # Monitoring
 opbeat
+
+# Misc
+django-meta
+django-notifications-hq

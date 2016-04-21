@@ -1,0 +1,153 @@
+{% extends "collection/base.html" %}
+
+{% block nav_style %}
+<nav class="header dark" data-pages="header">
+{% endblock nav_style %}
+
+{% block js %}
+{{ block.super }}
+<script src="http://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+<script>
+var ctx = $("#myChart").get(0).getContext("2d");
+var ctx2 = $("#myChart2").get(0).getContext("2d");
+var data = [
+   {
+    value: 61,
+    color: "#0F4754",
+    label: "Label 1"
+}, {
+    value: 11,
+    color: "#FFC226",
+    label: "Label 2"
+}, {
+    value: 28,
+    color: "#006A60",
+    label: "Label 3"
+}];
+
+var options = {
+    segmentShowStroke: false,
+    animateRotate: true,
+    animateScale: false,
+    percentageInnerCutout: 50,
+    tooltipTemplate: "<%= value %>%"
+}
+
+var radarData = {
+    labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul"],
+    datasets : [
+        {
+             fillColor: "#0F4754",
+             strokeColor: "#fff",
+            pointColor : "#fff",
+            pointStrokeColor : "#fff",
+            data : [65,59,90,81,56,55,40]
+        },
+        {
+            fillColor: "#006A60",
+            strokeColor: "#fff",
+            pointColor : "#fff",
+            pointStrokeColor : "#fff",
+            data : [28,48,40,19,96,27,100]
+        }
+    ]
+}
+
+
+var myChart = new Chart(ctx).Doughnut(data, options);
+var myChart2 = new Chart(ctx2).Radar(radarData, options);
+</script>
+{% endblock %}
+
+{% block css %}
+{{ block.super }}
+<style>
+.activity-feed {
+  padding: 15px;
+}
+.activity-feed .feed-item {
+  position: relative;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  border-left: 2px solid #e4e8eb;
+}
+.activity-feed .feed-item:last-child {
+  border-color: transparent;
+}
+.activity-feed .feed-item:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #f37167;
+}
+.activity-feed .feed-item .date {
+  position: relative;
+  top: -5px;
+  color: #8c96a3;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+.activity-feed .feed-item .text {
+  position: relative;
+  top: -3px;
+}
+</style>
+{% endblock css %}
+
+{% block content %}
+  <section class="container container-fixed-lg p-t-65 p-b-100  sm-p-b-30 sm-m-b-30">
+    <div class="row">
+      <div class="col-md-6">
+        {% if not object_list %}
+            <div class="well">
+                <h2><i class="fa fa-thumbs-up" aria-hidden="true"></i> No missed bin reports</h2>
+            </div>
+            <a href="{% url "collection:create" %}" class="btn btn-default">Report a missed bin</a>
+        {% else %}
+            <div class="activity-feed">
+            {% for report in object_list %}
+              <div class="feed-item">
+                <div class="date">Reported: {{ report.created }}
+                {% if report.created|timesince != report.modified|timesince %}
+                    <br /><span class="text-primary text-small">Last updated: {{ report.modified }}</span>
+                {% endif %}
+                </div>
+                <div class="text">
+                <p>Missed bin reported by {{ report.reported_by }}</p>
+                {% if report.notes %}
+                    <p class="text-warning">{{ report.notes }}</p>
+                {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+            <a href="{% url "notifications:all" %}" class="btn btn-complete">View notifications</a>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div class="visible-xs visible-sm b-b b-grey-light m-t-35 m-b-30"></div>
+            <div class="p-l-40 sm-p-l-0 sm-p-t-10">
+              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec suscipit arcu.</h3>
+              <p>Integer at lectus massa. Proin ac ultrices elit, sit amet imperdiet risus. Quisque ut enim vitae diam vestibulum elementum sit amet tempor est.</p>
+              <br>
+              <div class="row">
+                <div class="col-sm-6">
+                  <canvas id="myChart" width="200" height="200"></canvas>
+                </div>
+                <div class="col-sm-6">
+                  <canvas id="myChart2" width="200" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+  <!-- END CONTACT SECION -->
+{% endblock %}

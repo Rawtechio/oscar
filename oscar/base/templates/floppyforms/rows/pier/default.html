@@ -1,0 +1,36 @@
+{% load floppyforms %}
+
+{% block row %}
+    {% for field in fields %}
+        {% with classes=field.css_classes label=label|default:field.label help_text=help_text|default:field.help_text %}
+            {% if field.field.widget.input_type == "checkbox" %}
+                {% formfield field %}
+            {% else %}
+                <div class="form-group form-group-default{% if field.field.required %} required{% endif %}{% if field.errors %} error{% endif %}">
+                    {% block label %}
+                        <label>{{ label }}</label>
+                    {% endblock label %}
+
+                    {% block field %}
+                        {% block widget %}
+                            {% formfield field %}
+                        {% endblock %}
+                        {% block errors %}{% include "floppyforms/errors.html" with errors=field.errors %}{% endblock %}
+
+                        {% block help_text %}
+                            {% if field.help_text %}
+                                <p class="help-block text-muted">{{ field.help_text|safe }}</p>
+                            {% endif %}
+                        {% endblock help_text %}
+
+                        {% block hidden_fields %}
+                            {% for field in hidden_fields %}
+                                {{ field.as_hidden }}
+                            {% endfor %}
+                        {% endblock hidden_fields %}
+                    {% endblock field %}
+                </div><!--- .control-group{% if field.errors %}.error{% endif %} -->
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+{% endblock row %}

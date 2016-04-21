@@ -1,0 +1,25 @@
+{% load floppyforms %}
+
+{% block forms %}
+    {% for form in forms %}
+        {% block errors %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-error">
+                    {{ error }}
+                </div><!--- .alert.alert-error -->
+            {% endfor %}
+        {% endblock errors %}
+
+        {% block rows %}
+            <div class="input-group{% if form.login.errors or form.non_field_errors %} error{% endif %}">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="login" type="email" class="form-control input-lg" name="{{ form.login.html_name }}" value="{{ form.login.value|default_if_none:'' }}" placeholder="jane.doe@example.com">
+            </div>
+
+            <div class="input-group{% if form.password.errors or form.non_field_errors %} error{% endif %}">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input id="password" type="password" class="form-control input-lg" name="{{ form.password.html_name }}" placeholder="*********">
+            </div>
+        {% endblock rows %}
+    {% endfor %}
+{% endblock forms %}

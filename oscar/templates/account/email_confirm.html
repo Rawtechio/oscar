@@ -1,37 +1,41 @@
 {% extends "account/base.html" %}
 
-{% load i18n %}
 {% load account %}
 
-{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
-
+{% block nav_style %}
+<nav class="header dark" data-pages="header">
+{% endblock nav_style %}
 
 {% block content %}
-<div class="container">
+<section class="container container-fixed-lg p-t-65 p-b-100  sm-p-b-30 sm-m-b-30">
   <div class="row">
-    <div class="col-xs-12">
-        <h2>{% trans "Confirm E-mail Address" %}</h2>
-
+    <div class="col-md-12">
+      <h1>
         {% if confirmation %}
+          <i class="fa fa-check-square-o"></i> Verify your email address
+        {% else %}
+          <i class="fa fa-frown-o"></i> Oops, there's a small problem
+        {% endif %}
+      </h1>
 
+      {% if confirmation %}
         {% user_display confirmation.email_address.user as user_display %}
-
-        <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+        {% with confirmation.email_address.email as email %}
+          <p>Hi {{ user_display }} can you please confirm that <b>{{ email }}</b> is your email address?</p>
+        {% endwith %}
 
         <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-        {% csrf_token %}
-            <button id="confirm-button" class="submit" type="submit">{% trans 'Confirm' %}</button>
+            {% csrf_token %}
+            <button class="btn btn-primary" type="submit">That is my email address</button>
         </form>
-
-        {% else %}
-
+      {% else %}
         {% url 'account_email' as email_url %}
 
-        <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
-
-        {% endif %}
+        <p>Sorry but that e-mail confirmation link has expired or is invalid. It's ok though, we can send you a new one. You'll need to enter your email address and password on <a href="{{ email_url }}">this login page</a> and we'll email you a fresh activation email.</p>
+        <a class="btn btn-primary" href="{{ email_url }}">Email me a new link please!</a>
+      {% endif %}
     </div>
   </div>
-</div>
-{% endblock %}
+</section>
 
+{% endblock %}

@@ -1,18 +1,16 @@
 {% extends "account/base.html" %}
 
-{% load i18n %}
-
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block nav_style %}
+<nav class="header dark" data-pages="header">
+{% endblock nav_style %}
 
 {% block content %}
-<div class="container">
+<section class="container container-fixed-lg p-t-65 p-b-100  sm-p-b-30 sm-m-b-30">
   <div class="row">
-    <div class="col-md-5">
-        <h2>{% trans "Verify Your E-mail Address" %}</h2>
-        
-        <p>{% blocktrans %}We have sent an e-mail to <a href="mailto:{{ email }}">{{ email }}</a> for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
-    </div>    
+    <div class="col-md-12">
+      <h1><i class="fa fa-thumbs-up"></i> Almost done</h1>
+      <p>We've sent you an email with a verification link. Please check your emails and verify your email address before you sign in. If you don't receive your email in the next few minutes please email support on <a href="mailto:support@glasgow.gov.uk?subject=Missing email verification">support@glasgow.gov.uk</a></p>
+    </div>
   </div>
-</div>
-
+</section>
 {% endblock %}
